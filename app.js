@@ -23,18 +23,14 @@ const addTodo = event => {
     <i class="far fa-trash-alt delete" data-trash="${inputValue}"></i>
   </li>`
   event.target.reset()
-  
+
 }
 
-form.addEventListener('submit', addTodo)
-todosUl.addEventListener('click', deleteTodo)
-
-searchInput.addEventListener('input', event => {
+const searchTodo = event => {
   const inputValue = event.target.value.trim()
   const todosContainerChildren = Array.from(todosUl.children)
 
   todosContainerChildren.forEach(todo => {
-
     if(!todo.textContent.toLowerCase().includes(inputValue.toLowerCase())) {
       todo.classList.remove('d-flex')
       todo.classList.add('d-none')
@@ -43,8 +39,12 @@ searchInput.addEventListener('input', event => {
       todo.classList.remove('d-none')
       todo.classList.add('d-flex')
     }
-
+    
   })
-})
+}
+
+form.addEventListener('submit', addTodo)
+todosUl.addEventListener('click', deleteTodo)
+searchInput.addEventListener('input', searchTodo)
 
 
