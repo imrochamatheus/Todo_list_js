@@ -2,29 +2,32 @@ const form = document.querySelector('.form-add-todo')
 const todosUl = document.querySelector('.todos-container')
 const searchInput = document.querySelector('.form-search input')
 
-form.addEventListener('submit', event => {
+const deleteTodo = event => {
+  const clickedElement = event.target
+
+  if (clickedElement.dataset.trash) {
+    document.querySelector(`[data-todo="${clickedElement.dataset.trash}"]`)
+      .remove()
+  }
+  
+}
+
+const addTodo = event => {
   event.preventDefault()
 
   const inputValue = event.target.add.value.trim()
 
   todosUl.innerHTML += `
-  <li class="list-group-item d-flex justify-content-between align-items-center">
+  <li class="list-group-item d-flex justify-content-between align-items-center" data-todo="${inputValue}">
     <span>${inputValue}</span>
-    <i class="far fa-trash-alt delete"></i>
+    <i class="far fa-trash-alt delete" data-trash="${inputValue}"></i>
   </li>`
-
   event.target.reset()
-})
+  
+}
 
-todosUl.addEventListener('click', event => {
-  const clickedElement = event.target
-  const ifClickedElementHasADeleteClass = clickedElement.classList.contains('delete')
-
-  if(ifClickedElementHasADeleteClass) {
-    clickedElement.parentElement.remove()
-  }
-
-})
+form.addEventListener('submit', addTodo)
+todosUl.addEventListener('click', deleteTodo)
 
 searchInput.addEventListener('input', event => {
   const inputValue = event.target.value.trim()
