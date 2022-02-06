@@ -39,7 +39,7 @@ const searchTodo = event => {
       todo.classList.remove('d-none')
       todo.classList.add('d-flex')
     }
-    
+
   })
 }
 
