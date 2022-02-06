@@ -27,11 +27,12 @@ todosUl.addEventListener('click', event => {
 })
 
 searchInput.addEventListener('input', event => {
-  const inputValue = event.target.value
+  const inputValue = event.target.value.trim()
   const todosContainerChildren = Array.from(todosUl.children)
 
   todosContainerChildren.forEach(todo => {
-    if(!todo.textContent.includes(inputValue)) {
+
+    if(!todo.textContent.toLowerCase().includes(inputValue.toLowerCase())) {
       todo.classList.remove('d-flex')
       todo.classList.add('d-none')
 
